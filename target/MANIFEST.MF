@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: org.openhab.binding.draytonwiser;singleton:=true
+Export-Package: org.openhab.binding.draytonwiser,org.openhab.binding.d
+ raytonwiser.handler
+Bundle-Name: DraytonWiser Binding
+Bundle-Version: 2.2.0.201711162206
+Bundle-ClassPath: .
+Bundle-ManifestVersion: 2
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-Vendor: openHAB
+Import-Package: com.google.gson,com.google.gson.annotations,com.google
+ .common.collect,org.apache.http,org.apache.http.client,org.apache.htt
+ p.client.methods,org.apache.http.entity,org.apache.http.impl.client,o
+ rg.apache.http.message,org.eclipse.jdt.annotation;resolution:=optiona
+ l,org.eclipse.smarthome.config.core,org.eclipse.smarthome.core.librar
+ y.types,org.eclipse.smarthome.core.thing,org.eclipse.smarthome.core.t
+ hing.binding,org.eclipse.smarthome.core.thing.binding.builder,org.ecl
+ ipse.smarthome.core.thing.type,org.eclipse.smarthome.core.types,org.o
+ penhab.binding.draytonwiser,org.openhab.binding.draytonwiser.handler,
+ org.osgi.service.component.annotations;resolution:=optional,org.slf4j
+Service-Component: OSGI-INF/*.xml
+

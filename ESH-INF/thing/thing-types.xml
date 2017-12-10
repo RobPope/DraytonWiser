@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<thing:thing-descriptions bindingId="draytonwiser"
+						  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+						  xmlns:thing="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0"
+						  xsi:schemaLocation="http://eclipse.org/smarthome/schemas/thing-description/v1.0.0 http://eclipse.org/smarthome/schemas/thing-description-1.0.0.xsd">
+
+	<!-- Bridge Thing Type -->
+	<bridge-type id="heathub">
+	   <label>A Drayton Wiser HeatHub acting as a bridge to Thermostats and TRVs</label>
+        
+        <config-description>
+            <parameter name="ADDR" type="text" required="true">
+                <label>IP or Host Name</label>
+                <description>Will be resolved by discovery in the future
+                </description>
+            </parameter>
+            <parameter name="AUTHTOKEN" type="text" required="true">
+                <label>Authorisation Token used to authenticate requests</label>
+                <description>Currently needs to be identified by packet sniffing local network traffic. Sent in the header of any web request with the SECRET key value pair.
+                </description>
+            </parameter>
+        </config-description>
+	</bridge-type>
+	
+	<!-- Room Thing Type -->
+	<thing-type id="room">
+		<label>DraytonWiser Binding Room Thing</label>
+		<description>Room thing for DraytonWiser Binding</description>
+
+		<channels>
+			<channel id="currentTemperature" typeId="currentTemperature-channel"/>			
+            <channel id="currentHumidity" typeId="currentHumidity-channel"/>
+            <channel id="currentSetPoint" typeId="currentSetPoint-channel"/>
+		</channels>
+	</thing-type>
+	
+	<thing-type id="roomstat">
+	   <label>Drayton Wiser Room Thermostat or TRV</label>
+	   <description>Thermostat device including TRVs</description>
+	   
+	   <channels>
+	       <channel id="currentTemperature" typeId="currentTemperature-channel"/>          
+            <channel id="currentHumidity" typeId="currentHumidity-channel"/>
+            <channel id="currentSetPoint" typeId="currentSetPoint-channel"/>
+            <channel id="batteryLevel" typeId="batteryLevel-channel"/>
+	   </channels>
+	</thing-type>
+
+	<!-- Sample Channel Type -->
+	<channel-type id="currentTemperature-channel">
+		<item-type>Number</item-type>
+		<label>Temperature</label>
+		<description>Current temperature channel for DraytonWiser Binding</description>
+		<state readOnly="true" />
+	</channel-type>
+	
+    <channel-type id="currentHumidity-channel">
+        <item-type>Number</item-type>
+        <label>Humidity</label>
+        <description>Current Humidity channel for DraytonWiser Binding</description>
+        <state readOnly="true" />
+    </channel-type>
+    
+    <channel-type id="currentSetPoint-channel">
+        <item-type>Number</item-type>
+        <label>Set Point</label>
+        <description>Set Point Control channel for DraytonWiser Binding</description>
+        <state readOnly="false" />
+    </channel-type>
+    
+    <channel-type id="batteryLevel-channel">
+        <item-type>Number</item-type>
+        <label>Battery Level</label>
+        <description>Current Battery Level for the Room Stat</description>
+        <state readOnly="true" />
+    </channel-type>
+    
+
+</thing:thing-descriptions>
