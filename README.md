@@ -1,52 +1,59 @@
-# <bindingName> Binding
+# <bindingName> Drayton Wiser Smart Thermostat Binding
 
-_Give some details about what this binding is meant for - a protocol, system, specific device._
-
-_If possible, provide some resources like pictures, a YouTube video, etc. to give an impression of what can be done with this binding. You can place such resources into a `doc` folder next to this README.md._
+Currently very limited to getting and setting room temperatures.
 
 ## Supported Things
 
-_Please describe the different supported things / devices within this section._
-_Which different types are supported, which models were tested etc.?_
-_Note that it is planned to generate some part of this based on the XML files within ```ESH-INF/thing``` of your binding._
+At the moment this only supports a room and gets the humidity from one device in the room. Many things are on the todo list.
 
 ## Discovery
 
-_Describe the available auto-discovery features here. Mention for what it works and what needs to be kept in mind when using it._
+Not yet implemented
 
 ## Binding Configuration
 
-_If your binding requires or supports general configuration settings, please create a folder ```cfg``` and place the configuration file ```<bindingId>.cfg``` inside it. In this section, you should link to this file and provide some information about the options. The file could e.g. look like:_
+To install copy the .jar file to the addons folder. On linux this is /usr/share/openhab2/addons
 
-```
-# Configuration for the Philips Hue Binding
-#
-# Default secret key for the pairing of the Philips Hue Bridge.
-# It has to be between 10-40 (alphanumeric) characters 
-# This may be changed by the user for security reasons.
-secret=EclipseSmartHome
-```
+Find your HeatHub (the part that connects to the boiler) by following these instructions from Chris Evans:
+Log out of the app. Make sure you’re at the login screen
+Tap Setup / Create Account (even though your system has already been set up).
+Select the HubR type
+Press the Setup button on the hub
+This will start the WiserHeatXXX access point.
+Connect to WiserHeatXXX with a real computer. You should get an IP in the 192.168.8.0/24 range.
+Perform a GET to the /secret/ endpoint at 192.168.8.1. You might be able to use a browser, I didn’t try. If you prefer powershell like me…
 
-_Note that it is planned to generate some part of this based on the information that is available within ```ESH-INF/binding``` of your binding._
+Invoke-RestMethod -Method Get -UseBasicParsing -Uri http://192.168.8.1/secret/
 
-_If your binding does not offer any generic configurations, you can remove this section completely._
+You’ll get the secret back as a string.
+Now finish the setup…
+Follow the on-screen instructions to connect your smartphone to WiserHeatXXX
+Tap Skip when prompted to set up your heating system.
+Follow the on-screen instructions to connect your Heat HubR to the
+Internet by selecting your new Wi-Fi network.
+Tap Skip when prompted to register an account.
+You have now changed to a new Wi-Fi network. You will see the home
+screen and can proceed to control your heating as normal
 
 ## Thing Configuration
 
-_Describe what is needed to manually configure a thing, either through the (Paper) UI or via a thing-file. This should be mainly about its mandatory and optional configuration parameters. A short example entry for a thing file can help!_
+Then add the Room to your things file:
+draytonwiser:room:livingroom [ deviceIP="192.168.3.6", authToken="YOUR_SECRET_KEY" ]
 
-_Note that it is planned to generate some part of this based on the XML files within ```ESH-INF/thing``` of your binding._
+Replace livingroom with the name you've given your room in the Drayton Wiser App, removing any white space
 
 ## Channels
 
-_Here you should provide information about available channel types, what their meaning is and how they can be used._
+Channels currently supported are Temperature, Humidity and Set Point Temperature.
 
-_Note that it is planned to generate some part of this based on the XML files within ```ESH-INF/thing``` of your binding._
+In the items file add the following:
+//Thermostat
+Number temperature           "Temperature [%.1f °C]" (gTemp)   { channel = "draytonwiser:room:livingroom:currentTemperature" }
+Number humidity              "Humidity [%d %%]"          { channel = "draytonwiser:room:livingroom:currentHumidity" }
+Number setPoint              "Set Point [%.1f °C]"   { channel = "draytonwiser:room:livingroom:currentSetPoint" }
+
+Be sure to update the channel to reflect your channel set in the things file.
 
 ## Full Example
 
-_Provide a full usage example based on textual configuration files (*.things, *.items, *.sitemap)._
-
-## Any custom content here!
-
-_Feel free to add additional sections for whatever you think should also be mentioned about your binding!_
+//ToDo
