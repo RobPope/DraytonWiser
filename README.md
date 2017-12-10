@@ -38,6 +38,7 @@ screen and can proceed to control your heating as normal
 ## Thing Configuration
 
 Then add the Room to your things file:
+
 draytonwiser:room:livingroom [ deviceIP="192.168.3.6", authToken="YOUR_SECRET_KEY" ]
 
 Replace livingroom with the name you've given your room in the Drayton Wiser App, removing any white space
@@ -48,8 +49,11 @@ Channels currently supported are Temperature, Humidity and Set Point Temperature
 
 In the items file add the following:
 //Thermostat
+
 Number temperature           "Temperature [%.1f °C]" (gTemp)   { channel = "draytonwiser:room:livingroom:currentTemperature" }
+
 Number humidity              "Humidity [%d %%]"          { channel = "draytonwiser:room:livingroom:currentHumidity" }
+
 Number setPoint              "Set Point [%.1f °C]"   { channel = "draytonwiser:room:livingroom:currentSetPoint" }
 
 Be sure to update the channel to reflect your channel set in the things file.
