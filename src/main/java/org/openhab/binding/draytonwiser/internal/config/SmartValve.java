@@ -4,7 +4,7 @@ package org.openhab.binding.draytonwiser.internal.config;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class RoomStat {
+public class SmartValve {
 
     @SerializedName("id")
     @Expose
@@ -15,8 +15,11 @@ public class RoomStat {
     @SerializedName("MeasuredTemperature")
     @Expose
     public Integer measuredTemperature;
-    @SerializedName("MeasuredHumidity")
+    @SerializedName("PercentageDemand")
     @Expose
-    public Integer measuredHumidity;
+    public Integer percentageDemand;
+    @SerializedName("WindowState")
+    @Expose
+    public String windowState;
 
 }

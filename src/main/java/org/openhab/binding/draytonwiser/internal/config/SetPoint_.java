@@ -8,25 +8,9 @@ public class SetPoint_ {
 
     @SerializedName("Time")
     @Expose
-    private Integer time;
+    public Integer time;
     @SerializedName("DegreesC")
     @Expose
-    private Integer degreesC;
-
-    public Integer getTime() {
-        return time;
-    }
-
-    public void setTime(Integer time) {
-        this.time = time;
-    }
-
-    public Integer getDegreesC() {
-        return degreesC;
-    }
-
-    public void setDegreesC(Integer degreesC) {
-        this.degreesC = degreesC;
-    }
+    public Integer degreesC;
 
 }

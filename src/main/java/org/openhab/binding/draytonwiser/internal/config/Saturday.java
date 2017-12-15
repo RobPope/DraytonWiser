@@ -9,14 +9,6 @@ public class Saturday {
 
     @SerializedName("SetPoints")
     @Expose
-    private List<SetPoint_____> setPoints = null;
-
-    public List<SetPoint_____> getSetPoints() {
-        return setPoints;
-    }
-
-    public void setSetPoints(List<SetPoint_____> setPoints) {
-        this.setPoints = setPoints;
-    }
+    public List<SetPoint_____> setPoints = null;
 
 }

@@ -8,179 +8,63 @@ public class Device {
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    public Integer id;
     @SerializedName("ProductType")
     @Expose
-    private String productType;
+    public String productType;
     @SerializedName("ProductIdentifier")
     @Expose
-    private String productIdentifier;
+    public String productIdentifier;
     @SerializedName("ActiveFirmwareVersion")
     @Expose
-    private String activeFirmwareVersion;
+    public String activeFirmwareVersion;
     @SerializedName("Manufacturer")
     @Expose
-    private String manufacturer;
+    public String manufacturer;
     @SerializedName("ModelIdentifier")
     @Expose
-    private String modelIdentifier;
-    @SerializedName("HardwareVersion")
-    @Expose
-    private String hardwareVersion;
-    @SerializedName("SerialNumber")
-    @Expose
-    private String serialNumber;
-    @SerializedName("ProductRange")
-    @Expose
-    private String productRange;
-    @SerializedName("ProductModel")
-    @Expose
-    private String productModel;
-    @SerializedName("ProductFamily")
-    @Expose
-    private String productFamily;
+    public String modelIdentifier;
     @SerializedName("DisplayedSignalStrength")
     @Expose
-    private String displayedSignalStrength;
+    public String displayedSignalStrength;
+    @SerializedName("HardwareVersion")
+    @Expose
+    public String hardwareVersion;
+    @SerializedName("SerialNumber")
+    @Expose
+    public String serialNumber;
+    @SerializedName("ProductRange")
+    @Expose
+    public String productRange;
+    @SerializedName("ProductModel")
+    @Expose
+    public String productModel;
+    @SerializedName("ProductFamily")
+    @Expose
+    public String productFamily;
+    @SerializedName("OtaImageQueryCount")
+    @Expose
+    public Integer otaImageQueryCount;
+    @SerializedName("LastOtaImageQueryCount")
+    @Expose
+    public Integer lastOtaImageQueryCount;
     @SerializedName("BatteryVoltage")
     @Expose
-    private Integer batteryVoltage;
+    public Integer batteryVoltage;
     @SerializedName("BatteryLevel")
     @Expose
-    private String batteryLevel;
+    public String batteryLevel;
     @SerializedName("Rssi")
     @Expose
-    private Integer rssi;
+    public Integer rssi;
     @SerializedName("Lqi")
     @Expose
-    private Integer lqi;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getProductType() {
-        return productType;
-    }
-
-    public void setProductType(String productType) {
-        this.productType = productType;
-    }
-
-    public String getProductIdentifier() {
-        return productIdentifier;
-    }
-
-    public void setProductIdentifier(String productIdentifier) {
-        this.productIdentifier = productIdentifier;
-    }
-
-    public String getActiveFirmwareVersion() {
-        return activeFirmwareVersion;
-    }
-
-    public void setActiveFirmwareVersion(String activeFirmwareVersion) {
-        this.activeFirmwareVersion = activeFirmwareVersion;
-    }
-
-    public String getManufacturer() {
-        return manufacturer;
-    }
-
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
-    }
-
-    public String getModelIdentifier() {
-        return modelIdentifier;
-    }
-
-    public void setModelIdentifier(String modelIdentifier) {
-        this.modelIdentifier = modelIdentifier;
-    }
-
-    public String getHardwareVersion() {
-        return hardwareVersion;
-    }
-
-    public void setHardwareVersion(String hardwareVersion) {
-        this.hardwareVersion = hardwareVersion;
-    }
-
-    public String getSerialNumber() {
-        return serialNumber;
-    }
-
-    public void setSerialNumber(String serialNumber) {
-        this.serialNumber = serialNumber;
-    }
-
-    public String getProductRange() {
-        return productRange;
-    }
-
-    public void setProductRange(String productRange) {
-        this.productRange = productRange;
-    }
-
-    public String getProductModel() {
-        return productModel;
-    }
-
-    public void setProductModel(String productModel) {
-        this.productModel = productModel;
-    }
-
-    public String getProductFamily() {
-        return productFamily;
-    }
-
-    public void setProductFamily(String productFamily) {
-        this.productFamily = productFamily;
-    }
-
-    public String getDisplayedSignalStrength() {
-        return displayedSignalStrength;
-    }
-
-    public void setDisplayedSignalStrength(String displayedSignalStrength) {
-        this.displayedSignalStrength = displayedSignalStrength;
-    }
-
-    public Integer getBatteryVoltage() {
-        return batteryVoltage;
-    }
-
-    public void setBatteryVoltage(Integer batteryVoltage) {
-        this.batteryVoltage = batteryVoltage;
-    }
-
-    public String getBatteryLevel() {
-        return batteryLevel;
-    }
-
-    public void setBatteryLevel(String batteryLevel) {
-        this.batteryLevel = batteryLevel;
-    }
-
-    public Integer getRssi() {
-        return rssi;
-    }
-
-    public void setRssi(Integer rssi) {
-        this.rssi = rssi;
-    }
-
-    public Integer getLqi() {
-        return lqi;
-    }
-
-    public void setLqi(Integer lqi) {
-        this.lqi = lqi;
-    }
+    public Integer lqi;
+    @SerializedName("OtaLastImageSentBytes")
+    @Expose
+    public Integer otaLastImageSentBytes;
+    @SerializedName("PendingZigbeeMessageMask")
+    @Expose
+    public Integer pendingZigbeeMessageMask;
 
 }
