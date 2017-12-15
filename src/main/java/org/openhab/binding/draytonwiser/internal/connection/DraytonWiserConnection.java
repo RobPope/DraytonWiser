@@ -114,9 +114,9 @@ public class DraytonWiserConnection {
                 String responseBody = scanner.useDelimiter("\\A").next();
                 HeatHub hh = new Gson().fromJson(responseBody, HeatHub.class);
                 for (Room myRoom : hh.getRoom()) {
-                    String myRoomName = myRoom.getName().toLowerCase().replaceAll("\\s+", "");
+                    String myRoomName = myRoom.name.toLowerCase().replaceAll("\\s+", "");
                     if (myRoomName.equals(roomName)) {
-                        return myRoom.getId().toString();
+                        return myRoom.id.toString();
                     }
                 }
             }
