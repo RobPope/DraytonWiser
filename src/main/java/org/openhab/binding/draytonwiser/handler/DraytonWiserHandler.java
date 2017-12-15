@@ -23,6 +23,7 @@ import org.eclipse.smarthome.core.types.Command;
 import org.eclipse.smarthome.core.types.State;
 import org.eclipse.smarthome.core.types.UnDefType;
 import org.openhab.binding.draytonwiser.internal.config.HeatHub;
+import org.openhab.binding.draytonwiser.internal.config.Room;
 import org.openhab.binding.draytonwiser.internal.config.RoomStat;
 //Additional Imports
 import org.openhab.binding.draytonwiser.internal.connection.DraytonWiserConnection;
@@ -99,9 +100,10 @@ public class DraytonWiserHandler extends BaseThingHandler {
             try {
                 boolean success = updateDraytonWiserData();
                 if (success) {
-                    updateState(new ChannelUID(getThing().getUID(), CHANNEL_TEMPERATURE), getTemperature());
-                    updateState(new ChannelUID(getThing().getUID(), CHANNEL_HUMIDITY), getHumidity());
-                    updateState(new ChannelUID(getThing().getUID(), CHANNEL_SETPOINT), getSetPoint());
+                    String thingUID = getThing().getUID().getId();
+                    updateState(new ChannelUID(getThing().getUID(), CHANNEL_TEMPERATURE), getTemperature(thingUID));
+                    updateState(new ChannelUID(getThing().getUID(), CHANNEL_HUMIDITY), getHumidity(thingUID));
+                    updateState(new ChannelUID(getThing().getUID(), CHANNEL_SETPOINT), getSetPoint(thingUID));
                 }
             } catch (Exception e) {
                 logger.debug("Exception occurred during execution: {}", e.getMessage(), e);
@@ -115,12 +117,26 @@ public class DraytonWiserHandler extends BaseThingHandler {
         return true;
     }
 
-    private State getTemperature() {
+    private State getTemperature(String thingUID) {
         float temp = 0;
+
         if (DraytonWiserHeatHub != null) {
-            for (RoomStat roomstat : DraytonWiserHeatHub.getRoomStat()) {
-                temp = roomstat.getMeasuredTemperature();
-                temp = temp / 10;
+            /*
+             * for (RoomStat roomstat : DraytonWiserHeatHub.getRoomStat()) {
+             * temp = roomstat.getMeasuredTemperature();
+             * temp = temp / 10;
+             * }
+             * if (temp != 0) {
+             * return new DecimalType(temp);
+             * }
+             */
+            // Added for new logic (Only interested in Rooms)
+            for (Room room : DraytonWiserHeatHub.getRoom()) {
+                String roomName = room.name.toLowerCase().replaceAll("\\s+", "");
+                if (roomName.equals(thingUID)) {
+                    temp = room.calculatedTemperature;
+                    temp = temp / 10;
+                }
             }
             if (temp != 0) {
                 return new DecimalType(temp);
@@ -130,13 +146,28 @@ public class DraytonWiserHandler extends BaseThingHandler {
         // return new DecimalType("1");
     }
 
-    private State getHumidity() {
+    private State getHumidity(String thingUID) {
         int hum = 0;
         if (DraytonWiserHeatHub != null) {
-            for (RoomStat roomstat : DraytonWiserHeatHub.getRoomStat()) {
-                hum = roomstat.getMeasuredHumidity();
+            /*
+             * for (RoomStat roomstat : DraytonWiserHeatHub.getRoomStat()) {
+             * hum = roomstat.getMeasuredHumidity();
+             * }
+             *
+             * if (hum != 0) {
+             * return new DecimalType(hum);
+             * }
+             */
+            for (Room room : DraytonWiserHeatHub.getRoom()) {
+                String roomName = room.name.toLowerCase().replaceAll("\\s+", "");
+                if (roomName.equals(thingUID)) {
+                    for (RoomStat roomstat : DraytonWiserHeatHub.getRoomStat()) {
+                        if (roomstat.id == room.roomStatId) {
+                            hum = roomstat.measuredHumidity;
+                        }
+                    }
+                }
             }
-
             if (hum != 0) {
                 return new DecimalType(hum);
             }
@@ -145,16 +176,29 @@ public class DraytonWiserHandler extends BaseThingHandler {
         // return new DecimalType("1");
     }
 
-    private State getSetPoint() {
+    private State getSetPoint(String thingUID) {
         float setpoint = 0;
         if (DraytonWiserHeatHub != null) {
-            for (RoomStat roomstat : DraytonWiserHeatHub.getRoomStat()) {
-                setpoint = roomstat.getSetPoint();
-                setpoint = setpoint / 10;
+            /*
+             * for (RoomStat roomstat : DraytonWiserHeatHub.getRoomStat()) {
+             * setpoint = roomstat.getSetPoint();
+             * setpoint = setpoint / 10;
+             * }
+             * if (setpoint != 0) {
+             * return new DecimalType(setpoint);
+             * }
+             */
+            for (Room room : DraytonWiserHeatHub.getRoom()) {
+                String roomName = room.name.toLowerCase().replaceAll("\\s+", "");
+                if (roomName.equals(thingUID)) {
+                    setpoint = room.displayedSetPoint;
+                    setpoint = setpoint / 10;
+                }
             }
             if (setpoint != 0) {
                 return new DecimalType(setpoint);
             }
+
         }
         return UnDefType.UNDEF;
         // return new DecimalType("1");
